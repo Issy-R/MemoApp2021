@@ -3,6 +3,7 @@
     "name": "MemoApp2021",
     "slug": "MemoApp2021",
     "version": "1.0.0",
+    "privacy": "unlisted",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
