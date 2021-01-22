@@ -1,20 +1,21 @@
 import { string, shape } from 'prop-types';
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import { Feather } from '@expo/vector-icons';
 
 
 export default function CircleBotton(props) {
-  const { children, style } = props;
+  const { style, name } = props;
   return (
     <View style={[styles.circleBotton, style]}>
-        <Text style={styles.circleBottonLabel}>{children}</Text>
+        <Feather name={name} size={32} color="white" />
       </View>
   );
 }
 
 CircleBotton.propTypes = {
-  children: string.isRequired,
   style: shape(),
+  name: string.isRequired,
 };
 
 CircleBotton.defaultProps = {
