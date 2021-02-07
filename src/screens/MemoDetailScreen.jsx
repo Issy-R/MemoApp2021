@@ -1,26 +1,25 @@
 import { shape, string } from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native'
+import {
+  View, Text, ScrollView, StyleSheet,
+} from 'react-native';
 import firebase from 'firebase';
-import { dateToString } from "../utils";
-
+import { dateToString } from '../utils';
 
 import CircleBotton from '../components/CircleBotton';
 
 export default function MemoDetailScreen(props) {
   const { navigation, route } = props;
-  const{ id } = route.params;
-  console.log(id);
+  const { id } = route.params;
   const [memo, setMemo] = useState(null);
 
   useEffect(() => {
     const { currentUser } = firebase.auth();
-    let unsubscribe = () => {};
+    let unsubscribe = () => { };
     if (currentUser) {
       const db = firebase.firestore();
       const ref = db.collection(`users/${currentUser.uid}/memos`).doc(id);
       unsubscribe = ref.onSnapshot((doc) => {
-        console.log(doc.id, doc.data());
         const data = doc.data();
         setMemo({
           id: doc.id,
@@ -42,16 +41,17 @@ export default function MemoDetailScreen(props) {
         </Text>
       </ScrollView>
       <CircleBotton
-      style={{top: 60, bottom: 'auto' }}
-      name='edit-2'
-      onPress={() => { navigation.navigate('MemoEdit', { id: memo.id, bodyText: memo.bodyText}); }} />
+        style={{ top: 60, bottom: 'auto' }}
+        name="edit-2"
+        onPress={() => { navigation.navigate('MemoEdit', { id: memo.id, bodyText: memo.bodyText }); }}
+      />
     </View>
   );
 }
 
 MemoDetailScreen.propTypes = {
   route: shape({
-    params: shape({ id: string})
+    params: shape({ id: string }),
   }).isRequired,
 };
 

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, Alert, } from 'react-native';
+import {
+  View, Text, TextInput, StyleSheet, TouchableOpacity, Alert,
+} from 'react-native';
 import firebase from 'firebase';
 import { translateErrors } from '../utils';
 import Button from '../components/Button';
-
-
 
 export default function SignUpScreen(props) {
   const { navigation } = props;
@@ -13,16 +13,13 @@ export default function SignUpScreen(props) {
 
   function handlePress() {
     firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        const { user } = userCredential;
-        console.log(user.uid);
+      .then(() => {
         navigation.reset({
           index: 0,
           routes: [{ name: 'MemoList' }],
         });
       })
       .catch((error) => {
-        console.log(error.code, error.message);
         const errorMsg = translateErrors(error.code);
         Alert.alert(errorMsg.title, errorMsg.description);
       });
@@ -36,22 +33,22 @@ export default function SignUpScreen(props) {
           value={email}
           onChangeText={(text) => { setEmail(text); }}
           style={styles.input}
-          autoCapitalize='none'
-          keyboardType='email-address'
-          placeholder='Email Adress'
-          textContentType='emailAddress'
+          autoCapitalize="none"
+          keyboardType="email-address"
+          placeholder="Email Adress"
+          textContentType="emailAddress"
         />
         <TextInput
           value={password}
           onChangeText={(text) => { setPassword(text); }}
           style={styles.input}
-          autoCapitalize='none'
-          placeholder='Password'
+          autoCapitalize="none"
+          placeholder="Password"
           secureTextEntry
-          textContentType='password'
+          textContentType="password"
         />
         <Button
-          label='Submit'
+          label="Submit"
           onPress={handlePress}
         />
         <View style={styles.footer}>

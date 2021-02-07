@@ -19,7 +19,7 @@ Hello.propTypes = {
   style: shape(),
 };
 
-Hello.defaltProps = {
+Hello.defaultProps = {
   bang: false,
   style: null,
 };
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     backgroundColor: 'blue',
     fontSize: 40,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     padding: 16,
   },
 

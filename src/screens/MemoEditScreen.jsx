@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { shape, string } from 'prop-types';
-import { Alert, KeyboardAvoidingView, StyleSheet, TextInput, View, } from 'react-native';
-import firebase from "firebase";
+import {
+  Alert, StyleSheet, TextInput, View,
+} from 'react-native';
+import firebase from 'firebase';
 
 import CircleBotton from '../components/CircleBotton';
 import KeyboardSafeView from '../components/KeyboardSafeView';
@@ -21,29 +23,28 @@ export default function MemoEditScreen(props) {
         bodyText: body,
         updatedAt: new Date(),
       })
-      .then(() => {
-        navigation.goBack();
-      })
-      .catch((error) => {
-        const errorMsg = translateErrors(error.code);
-        Alert.alert(errorMsg.title, errorMsg.description);
-      });
+        .then(() => {
+          navigation.goBack();
+        })
+        .catch((error) => {
+          const errorMsg = translateErrors(error.code);
+          Alert.alert(errorMsg.title, errorMsg.description);
+        });
     }
-
   }
   return (
     <KeyboardSafeView style={styles.container}>
       <View style={styles.inputContainer}>
         <TextInput
-         value={body}
-         multiline
-         style={styles.input}
-         onChangeText={(text) => { setBody(text); }}
+          value={body}
+          multiline
+          style={styles.input}
+          onChangeText={(text) => { setBody(text); }}
         />
       </View>
       <CircleBotton
-      name='check'
-      onPress={handlePress}
+        name="check"
+        onPress={handlePress}
       />
 
     </KeyboardSafeView>

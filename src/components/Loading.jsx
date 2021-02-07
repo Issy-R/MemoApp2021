@@ -1,16 +1,16 @@
-import { bool } from "prop-types";
-import React from "react";
-import { View, StyleSheet, ActivityIndicator } from "react-native";
+import { bool } from 'prop-types';
+import React from 'react';
+import { View, StyleSheet, ActivityIndicator } from 'react-native';
 
 export default function Loading(props) {
   const { isLoading } = props;
-  if (!isLoading){
+  if (!isLoading) {
     return null;
   }
   return (
     <View style={styles.container}>
       <View>
-        <ActivityIndicator size='large' color='#000000' />
+        <ActivityIndicator size="large" color="#000000" />
       </View>
     </View>
   );
@@ -20,7 +20,7 @@ Loading.propTypes = {
   isLoading: bool,
 };
 
-Loading.defaltProps = {
+Loading.defaultProps = {
   isLoading: false,
 };
 

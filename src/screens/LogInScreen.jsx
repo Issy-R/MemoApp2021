@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import {
+  View, Text, TextInput, StyleSheet, TouchableOpacity, Alert,
+} from 'react-native';
 import firebase from 'firebase';
 
 import Button from '../components/Button';
 import Loading from '../components/Loading';
 import { translateErrors } from '../utils';
-
-
 
 export default function LogInScreen(props) {
   const { navigation } = props;
@@ -31,21 +31,19 @@ export default function LogInScreen(props) {
   function handlePress() {
     setLoading(true);
     firebase.auth().signInWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        const { user } = userCredential;
-        console.log(user.uid);
+      .then(() => {
         navigation.reset({
           index: 0,
           routes: [{ name: 'MemoList' }],
         });
       })
       .catch((error) => {
-        const errorMsg = translateErrors(error.code)
+        const errorMsg = translateErrors(error.code);
         Alert.alert(errorMsg.tirle, errorMsg.description);
       })
-      .then(() => {setLoading(false);
+      .then(() => {
+        setLoading(false);
       });
-
   }
   return (
     <View style={styles.container}>
@@ -56,22 +54,22 @@ export default function LogInScreen(props) {
           value={email}
           onChangeText={(text) => { setEmail(text); }}
           style={styles.input}
-          autoCapitalize='none'
-          keyboardType='email-address'
-          placeholder='Email Adress'
-          textContentType='emailAddress'
+          autoCapitalize="none"
+          keyboardType="email-address"
+          placeholder="Email Adress"
+          textContentType="emailAddress"
         />
         <TextInput
           value={password}
           onChangeText={(text) => { setPassword(text); }}
           style={styles.input}
-          autoCapitalize='none'
-          placeholder='Password'
+          autoCapitalize="none"
+          placeholder="Password"
           secureTextEntry
-          textContentType='password'
+          textContentType="password"
         />
         <Button
-          label='Submit'
+          label="Submit"
           onPress={handlePress}
         />
         <View style={styles.footer}>
